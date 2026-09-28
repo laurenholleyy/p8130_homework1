@@ -1,0 +1,53 @@
+---
+title: "p8130_homework1"
+author: "Lauren Holley"
+date: "2026-09-28"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+## Question 8
+
+#### Part A
+
+```{r}
+d = read.csv("homework1_clinic.csv",
+             colClasses = c(id = "character"))
+
+with(d, table(program, improved))
+```
+
+```{r}
+d |>
+  group_by(program) |>
+  summarise(
+    total = n(),
+    observed_improved = sum(!is.na(improved)),
+    number_improved = sum(improved, na.rm = TRUE),
+    improvement_proportion = mean(improved, na.rm = TRUE),
+    missing_waits = sum(is.na(wait_min))
+  )
+```
+
+#### Part B
+
+```{r}
+rate = tapply(d$improved,
+               d$program, mean)
+
+rate
+
+rate["Yes"] - rate["No"]
+```
+
+The yes minus no difference in improvement proportions is 0.3333 or 33.33 percentage points. 
+
+#### Part C
+
+```{r}
+
+```
+
