@@ -181,7 +181,7 @@ plot(seq_len(B), running,
 abline(h = 1/56)
 ```
 
-![](p8130_homework1_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](p8130_homework1_files/figure-gfm/running_prob_plot-1.png)<!-- -->
 
 #### Part 4
 
