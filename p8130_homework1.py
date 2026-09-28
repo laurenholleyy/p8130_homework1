@@ -63,6 +63,8 @@ plt.xlabel("Wait (minutes)")
 
 plt.ylabel("Number of visits")
 
+#plt.savefig("q7_histogram.pdf", bbox_inches="tight")
+
 print(counts); plt.show()
 
 plt.boxplot(x,
@@ -70,6 +72,8 @@ plt.boxplot(x,
             whis = 1.5, showmeans = False)
 
 plt.xlabel("Wait (minutes)")
+
+#plt.savefig("q7_boxplot.pdf", bbox_inches="tight")
 
 plt.show()
 

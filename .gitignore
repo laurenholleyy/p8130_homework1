@@ -3,3 +3,7 @@
 .RData
 .Ruserdata
 .DS_store
+*.pdf
+*.html
+*.log
+*.tex

@@ -124,6 +124,13 @@ With replacement:
 #### Part C
 
 ```{r}
+set.seed(813110)
+
+draws = replicate(B,
+  sample.int(8, 3, replace = FALSE))
+
+all3 = colSums(draws <= 3) == 3
+
 running = cumsum(all3)/seq_len(B)
 
 running[c(100, 1000, 10000, 100000)]
