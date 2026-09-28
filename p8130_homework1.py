@@ -82,4 +82,61 @@ plt.show()
 # minute wait was potentially a data collection error or what the cause of it
 # was before making a decision on whether to remove it from the analysis. 
 
+
 # Question 9
+
+# Part A
+
+rng = np.random.default_rng(813109)
+
+B = 100000
+
+D = rng.random(B) < .02
+
+Tpos = rng.random(B) < np.where(
+    D, .90, .05)
+
+print("TP:", np.sum(D & Tpos))
+print("FN:", np.sum(D & ~Tpos))
+print("FP:", np.sum(~D & Tpos))
+print("TN:", np.sum(~D & ~Tpos))
+
+# Part B
+
+sens = Tpos[D].mean()
+
+print("Sensitivity:", sens)
+
+spec = (~Tpos[~D]).mean()
+
+print("Specificity:", spec)
+
+ppv = D[Tpos].mean()
+
+print("PPV:", ppv)
+
+npv = (~D[~Tpos]).mean()
+
+print("NPV:", npv)
+
+ppv_theor = (.90 * .02) / (
+    (.90 * .02) + (.05 * .98))
+
+print("Theoretical PPV:", ppv_theor)
+
+npv_theor = (.95 * .98) / (
+    (.95 * .98) + (.10 * .02))
+
+print("Theoretical NPV:", npv_theor)
+
+# The theoretical versus simulated sensitivity, specificity, NPV and PPV were 
+# all pretty similar, with some slight differences due to random variation in 
+# computer sampling.
+
+ppv_theor_risen = (.90 * .20) / (
+    (.90 * .20) + (.05 * .80))
+
+print("Theoretical PPV High Prevalence:", ppv_theor_risen)
+
+# The PPV moves significantly higher, meaning that there would be more disease
+# among positive tests. 

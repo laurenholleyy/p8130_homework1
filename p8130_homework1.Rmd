@@ -5,7 +5,7 @@ date: "2026-09-28"
 output: github_document
 ---
 
-```{r}
+```{r message=FALSE}
 library(tidyverse)
 ```
 
@@ -43,11 +43,20 @@ rate
 rate["Yes"] - rate["No"]
 ```
 
-The yes minus no difference in improvement proportions is 0.3333 or 33.33 percentage points. 
+The Yes minus No difference in improvement proportions is 0.3333 or 33.33 percentage points. 
 
 #### Part C
 
 ```{r}
-
+barplot(rate, col = "#8DCFEC",
+        ylim = c(0, 1),
+        xlab = "Program Group",
+        ylab = "Improvement Proportion")
 ```
+
+#### Part D
+
+Those in the program group had a higher improvement proportion, however the difference found is not automatically causal because program enrollment was voluntary. One possible confounder is that participants who are experiencing more severe symptoms could be more likely to seek program enrollment, impacting baseline measurements. Furthermore, if they begin the program with more severe symptoms, this would impact further down the line improvement levels. 
+
+## Question 10
 
