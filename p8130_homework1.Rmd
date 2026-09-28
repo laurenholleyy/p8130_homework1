@@ -47,7 +47,7 @@ The Yes minus No difference in improvement proportions is 0.3333 or 33.33 percen
 
 #### Part C
 
-```{r}
+```{r improvement_plot}
 barplot(rate, col = "#8DCFEC",
         ylim = c(0, 1),
         xlab = "Program Group",
@@ -60,3 +60,84 @@ Those in the program group had a higher improvement proportion, however the diff
 
 ## Question 10
 
+#### Part A
+
+Without replacement:
+
+P(all 3 allergy) = (3/8)(2/7)(1/6) = 0.0179
+
+With replacement:
+
+P(all 3 allergy) = (3/8)(3/8)(3/8) = 0.0527
+
+#### Part B
+
+Without replacement: 
+
+```{r}
+set.seed(813110)
+B = 100000
+
+draws = replicate(B,
+  sample.int(8, 3, replace = FALSE))
+
+all3 = colSums(draws <= 3) == 3
+
+c(theory = (3/8)*(2/7)*(1/6),
+  empirical = mean(all3))
+
+sum(all3)
+```
+
+With replacement:
+
+```{r}
+set.seed(813111)
+
+draws = replicate(B,
+  sample.int(8, 3, replace = TRUE))
+
+all3 = colSums(draws <= 3) == 3
+
+c(theory = (3/8)*(3/8)*(3/8),
+  empirical = mean(all3))
+
+sum(all3)
+```
+
+Without replacement:
+
+* Successes: 1,792
+
+* Empirical probability: 0.0179
+
+* Theoretical probability: 0.0179
+
+With replacement:
+
+* Successes: 5,213
+
+* Empirical probability: 0.0521
+
+* Theoretical probability: 0.0527
+
+#### Part C
+
+```{r}
+running = cumsum(all3)/seq_len(B)
+
+running[c(100, 1000, 10000, 100000)]
+```
+
+```{r}
+plot(seq_len(B), running,
+     type = "l",
+     xlab = "Number of Trials",
+     ylab = "Running Empirical Probability")
+
+abline(h = 1/56)
+```
+
+#### Part 4
+
+When there is no replacement, the probability changes as people with the allergy are selected, whereas with replacement this does not occur. The law of large numbers does not guarantee exact agreement after 25 trials, as there can always be variation. However an increase in trials does lead to running probability closer to the expected. 
